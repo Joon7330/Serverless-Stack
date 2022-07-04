@@ -1,5 +1,6 @@
 // ApiStack.ts
 import * as sst from "@serverless-stack/resources";
+import { ApiAuthorizationType } from "@serverless-stack/resources";
 
 export default class ApiStack extends sst.Stack {
     // 다른 스택에서 접근할 수 있도록 선언
@@ -11,11 +12,13 @@ export default class ApiStack extends sst.Stack {
         const { table } = props;
 
         this.api = new sst.Api(this, "api-Joon", {
+            defaultAuthorizationType: ApiAuthorizationType.AWS_IAM,
             defaultFunctionProps: {
                 environment: {
                     TABLE_NAME: table.tableName,
                 },
             },
+            cors: true,
             routes: {
                 "POST /notes": "src/create.main",
                 "GET /notes/{id}": "src/get.main",
