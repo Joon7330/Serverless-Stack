@@ -1,13 +1,7 @@
-import MyStack from "./MyStack";
+// stacks/index.tws
 import * as sst from "@serverless-stack/resources";
+import StorageStack from "./StorageStack";
 
 export default function main(app: sst.App): void {
-  // Set default runtime for all functions
-  app.setDefaultFunctionProps({
-    runtime: "nodejs14.x"
-  });
-
-  new MyStack(app, "my-stack");
-
-  // Add more stacks
+  new StorageStack(app, "storage-Joon");
 }
